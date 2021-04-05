@@ -5,8 +5,7 @@ ENV LANG=zh_CN.UTF-8;\
     LC_ALL=zh_CN.UTF-8;\
     TZ="Asia/Shanghai";\
 	
-RUN hostnamectl set-hostname etcd1 && \
-    yum install mkdir curl wget tar chown unzip vim tree net-tools lrzsz gcc-c++ pcre pcre-devel openssl epel-release openssl-devel unzip zip ntpdate iptables conntrack ipvsadm ipset jq git curl sysstatlibseccomp iptables-services -y && \
+RUN yum install mkdir curl wget tar chown unzip vim tree net-tools lrzsz gcc-c++ pcre pcre-devel openssl epel-release openssl-devel unzip zip ntpdate iptables conntrack ipvsadm ipset jq git curl sysstatlibseccomp iptables-services -y && \
 	wget http://mirrors.163.com/.help/CentOS7-Base-163.repo && \
 	yum update -y && \
 	rpm -import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org && \
@@ -16,4 +15,5 @@ RUN hostnamectl set-hostname etcd1 && \
 	swapoff -a && \
 	echo vm.swappiness=0 >> /etc/sysctl.conf && \
 	systemctl stop firewalld.service && \
-	systemctl disable firewalld.service && systemctl start supervisord.service && systemctl enable supervisord.service
+	systemctl disable firewalld.service && systemctl start supervisord.service && systemctl enable supervisord.service \
+	hostnamectl set-hostname “etcd1”
